@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
          password: params[:password], profile_picture: params[:profilePicture] || nil) 
         # byebug
          if user
-            render json: user
+            render json: {token: JWT.encode({user_id: user.id}, 'Secret')}
          else
             render json: {error: 'Something went wrong'}
          end

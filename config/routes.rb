@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
+
+
   namespace :api do
     namespace :v1 do
       
+      resources :posts
+      resources :timelines
       resources :users
 
+      post '/login', to: 'auth#login'
+      get '/user_timeline', to: 'timelines#user_timeline'
     end
   end
 

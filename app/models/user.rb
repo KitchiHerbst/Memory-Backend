@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     # associations
-    # has_many :timelines
+    has_many :timelines
+    has_many :posts
 
     # validations
     validates :first_name, presence: true
