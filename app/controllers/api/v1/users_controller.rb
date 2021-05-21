@@ -1,5 +1,12 @@
 class Api::V1::UsersController < ApplicationController
 
+   def index
+      user = User.find(decoded_token[0]['user_id'])
+      users = User.all.select {|u| u.id != user.id}
+      # users = User.all 
+      render json: users
+   end
+
     def create 
         # byebug
 
