@@ -7,6 +7,11 @@ class Api::V1::UsersController < ApplicationController
       render json: users
    end
 
+   def get_user
+      user = User.find(decoded_token[0]['user_id'])
+      render json: user
+   end
+
     def create 
         # byebug
 
@@ -19,6 +24,12 @@ class Api::V1::UsersController < ApplicationController
             render json: {error: 'Something went wrong'}
          end
 
+    end
+
+    def update
+      user = User.find(decoded_token[0]['user_id'])
+      user.update_attributes(first_name => params[:first_name], last_name => params[:last_name], email => params[:email], profile_picture => params[:profile_picture])
+      byebug
     end
 
 end

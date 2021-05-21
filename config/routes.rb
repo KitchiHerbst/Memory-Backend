@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :timelines
       resources :users
 
+      get '/get_user', to: 'users#get_user'
       post '/login', to: 'auth#login'
       get '/user_timeline', to: 'timelines#user_timeline'
     end

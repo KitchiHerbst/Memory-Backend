@@ -1,8 +1,9 @@
 class Api::V1::FriendshipsController < ApplicationController
 
     def index
-        byebug
         # we only need all of the friendships of the logged in user and then send back the users that they are friends with
+        user = User.find_by(id: decoded_token[0]['user_id'])
+        render json: user.friends
     end
 
     def create
@@ -13,8 +14,7 @@ class Api::V1::FriendshipsController < ApplicationController
     end
 
     def destroy
-        Friendship.destroy_reciprocal_for_ids(current_user_id, params[:friend_id])
-        redirect_to(request.referer)
+        Friendship.destroy_reciprocal_for_ids(current_user_id, params['_json'])
     end
 
 end
