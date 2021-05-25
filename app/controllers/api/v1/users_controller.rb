@@ -3,7 +3,6 @@ class Api::V1::UsersController < ApplicationController
    def index
       user = User.find(decoded_token[0]['user_id'])
       users = User.all.select {|u| u.id != user.id}
-      # users = User.all 
       render json: users
    end
 
@@ -11,6 +10,10 @@ class Api::V1::UsersController < ApplicationController
       user = User.find(decoded_token[0]['user_id'])
       render json: user
    end
+
+   # def custom_user_path
+   #    byebug
+   # end
 
     def create 
         # byebug
@@ -28,8 +31,17 @@ class Api::V1::UsersController < ApplicationController
 
     def update
       user = User.find(decoded_token[0]['user_id'])
-      user.update_attributes(first_name => params[:first_name], last_name => params[:last_name], email => params[:email], profile_picture => params[:profile_picture])
-      byebug
+      user.first_name = params[:first_name]
+      user.last_name = params[:last_name]
+      user.email = params[:email]
+      user.profile_picture = params[:profile_picture]
+      user.save
+      render json: user
+    end
+
+    def destroy
+      user = User.find(params[:id])
+      user.destroy
     end
 
 end
