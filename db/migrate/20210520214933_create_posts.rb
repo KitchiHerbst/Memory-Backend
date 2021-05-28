@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :picture
       t.text :text
       t.string :date
+      t.string :location
       t.timestamps
     end
   end

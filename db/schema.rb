@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_135809) do
     t.string "picture"
     t.text "text"
     t.string "date"
+    t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

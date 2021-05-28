@@ -1,10 +1,11 @@
 class Api::V1::FriendshipsController < ApplicationController
 
     def index
-        byebug
+        # byebug
         # we only need all of the friendships of the logged in user and then send back the users that they are friends with
         user = User.find_by(id: decoded_token[0]['user_id'])
-        render json: user.friends
+        array = user.not_friends
+        render json: {friends: user.friends, not_friends: array}
     end
 
     def create
