@@ -6,9 +6,9 @@ class Api::V1::AuthController < ApplicationController
         # if username and password matches then log that user in
         # send back a token
 
-        # byebug
-
+        
         user = User.find_by(email: auth_params[:email])
+        # byebug
         if user && user.authenticate(auth_params[:password])
             render json: {token: JWT.encode({user_id: user.id}, 'Secret')}
         # else
