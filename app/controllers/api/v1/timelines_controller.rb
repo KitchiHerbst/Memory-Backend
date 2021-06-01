@@ -16,4 +16,10 @@ class Api::V1::TimelinesController < ApplicationController
         render json: {timeline: friend.timelines.first, posts: friend.timelines.first.posts}
     end
 
+    def update
+        timeline = Timeline.find(params['id'])
+        timeline.access = params['_json'].upcase
+        timeline.save
+    end
+
 end
