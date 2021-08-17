@@ -13,9 +13,10 @@ class Api::V1::UsersController < ApplicationController
    end
 
     def create 
-      user = User.create(first_name: params[:firstName], last_name: params[:lastName], email: params[:email],
+      # byebug
+      user = User.new(first_name: params[:firstName], last_name: params[:lastName], email: params[:email],
              password: params[:password], profile_picture: params[:profilePicture] || nil) 
-      if user
+      if user.save
          render json: {token: JWT.encode({user_id: user.id}, 'Secret')}
       else
          render json: {error: 'Something went wrong'}
